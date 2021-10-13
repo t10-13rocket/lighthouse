@@ -15,6 +15,7 @@ import {Report} from './wrappers/report';
 import {Topbar} from './topbar';
 import {Header} from './header';
 import {I18nProvider} from './i18n/i18n';
+import {Styles} from './wrappers/styles';
 
 const Content: FunctionComponent = () => {
   const currentLhr = useCurrentLhr();
@@ -54,6 +55,7 @@ export const App: FunctionComponent<{flowResult: LH.FlowResult}> = ({flowResult}
     <FlowResultContext.Provider value={flowResult}>
       <ReportRendererProvider>
         <I18nProvider>
+          <Styles/>
           <div className={classNames('App', {'App--collapsed': collapsed})} data-testid="App">
             <Topbar onMenuClick={() => setCollapsed(c => !c)} />
             <Sidebar/>

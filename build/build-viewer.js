@@ -45,11 +45,21 @@ async function run() {
     html: {path: 'index.html'},
     stylesheets: [
       {path: 'styles/*'},
+      {path: '../../flow-report/assets/styles.css'},
     ],
     javascripts: [
       await generatorJsPromise,
       {path: require.resolve('pako/dist/pako_inflate.js')},
       {path: 'src/main.js', rollup: true, rollupPlugins: [
+        rollupPlugins.typescript({
+          tsconfig: 'flow-report/tsconfig.json',
+          // Plugin struggles with custom outDir, so revert it from tsconfig value
+          // as well as any options that require an outDir is set.
+          outDir: null,
+          composite: false,
+          emitDeclarationOnly: false,
+          declarationMap: false,
+        }),
         rollupPlugins.replace({
           // Default delimiters are word boundraries. Setting them to nothing (empty strings)
           // makes this plugin replace any subtring found.

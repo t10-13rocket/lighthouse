@@ -20,6 +20,7 @@
 'use strict';
 
 /** @typedef {import('./dom.js').DOM} DOM */
+/** @typedef {{disableGlobalStyles?: boolean}} Options */
 
 import {CategoryRenderer} from './category-renderer.js';
 import {DetailsRenderer} from './details-renderer.js';
@@ -29,11 +30,15 @@ import {PerformanceCategoryRenderer} from './performance-category-renderer.js';
 import {PwaCategoryRenderer} from './pwa-category-renderer.js';
 import {Util} from './util.js';
 
+
 export class ReportRenderer {
   /**
    * @param {DOM} dom
+   * @param {Options=} options
    */
-  constructor(dom) {
+  constructor(dom, options) {
+    /** @type {Options|undefined} */
+    this.options = options;
     /** @type {DOM} */
     this._dom = dom;
   }
@@ -276,7 +281,9 @@ export class ReportRenderer {
     }
 
     const reportFragment = this._dom.createFragment();
-    reportFragment.append(this._dom.createComponent('styles'));
+    if (!this.options || !this.options.disableGlobalStyles) {
+      reportFragment.append(this._dom.createComponent('styles'));
+    }
     const topbarDocumentFragment = this._renderReportTopbar(report);
 
     reportFragment.appendChild(topbarDocumentFragment);

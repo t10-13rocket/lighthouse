@@ -32,7 +32,9 @@ export const ReportRendererProvider: FunctionComponent = ({children}) => {
     const dom = new DOM(document);
     const detailsRenderer = new DetailsRenderer(dom);
     const categoryRenderer = new CategoryRenderer(dom, detailsRenderer);
-    const reportRenderer = new ReportRenderer(dom);
+    const reportRenderer = new ReportRenderer(dom, {
+      disableGlobalStyles: true,
+    });
     return {
       dom,
       detailsRenderer,

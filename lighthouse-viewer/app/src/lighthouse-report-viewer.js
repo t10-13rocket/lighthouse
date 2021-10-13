@@ -14,6 +14,7 @@ import {ViewerUIFeatures} from './viewer-ui-features.js';
 import {DOM} from '../../../report/renderer/dom.js';
 import {ReportRenderer} from '../../../report/renderer/report-renderer.js';
 import {TextEncoding} from '../../../report/renderer/text-encoding.js';
+import renderFlow from '../../../flow-report/render-flow.js';
 
 /* global logger */
 
@@ -190,12 +191,17 @@ export class LighthouseReportViewer {
   }
 
   /**
-   * @param {LH.Result} json
-   * @private
+   * @param {LH.Result | LH.FlowResult} json
+   * @return {json is LH.FlowResult}
    */
-  // TODO: Really, `json` should really have type `unknown` and
-  // we can have _validateReportJson verify that it's an LH.Result
-  _replaceReportHtml(json) {
+  _isFlowReport(json) {
+    return 'steps' in json && Array.isArray(json.steps);
+  }
+
+  /**
+   * @param {LH.Result} json
+   */
+  _renderLhr(json) {
     // Allow users to view the runnerResult
     if ('lhr' in json) {
       const runnerResult = /** @type {{lhr: LH.Result}} */ (/** @type {unknown} */ (json));
@@ -253,6 +259,29 @@ export class LighthouseReportViewer {
       throw e;
     } finally {
       this._reportIsFromGist = this._reportIsFromPSI = this._reportIsFromJSON = false;
+    }
+  }
+
+  /**
+   * @param {LH.FlowResult} json
+   */
+  _renderFlowResult(json) {
+    const container = find('main', document);
+    renderFlow(json, container);
+  }
+
+  /**
+   * @param {LH.Result | LH.FlowResult} json
+   * @private
+   */
+  // TODO: Really, `json` should really have type `unknown` and
+  // we can have _validateReportJson verify that it's an LH.Result
+  _replaceReportHtml(json) {
+    if (this._isFlowReport(json)) {
+      this._renderFlowResult(json);
+    } else {
+      console.log('######');
+      this._renderLhr(json);
     }
 
     // Remove the placeholder UI once the user has loaded a report.
