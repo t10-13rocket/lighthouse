@@ -93,6 +93,8 @@ const UIStrings = {
   'manifest-location-changed': `Manifest URL changed while the manifest was being fetched.`,
   /** Warning message explaining that the page does not work offline. */
   'warn-not-offline-capable': `Page does not work offline. The page will not be regarded as installable after Chrome 93, stable release August 2021.`,
+  /** Message logged when the web app has been uninstalled o desktop, signalling that the install banner state is being reset. */
+  'pipeline-restarted': 'PWA has been uninstalled and installability checks resetting.',
 };
 /* eslint-enable max-len */
 
@@ -141,6 +143,11 @@ class InstallableManifest extends Audit {
 
       if (err.errorId === 'warn-not-offline-capable') {
         warnings.push(str_(UIStrings[err.errorId]));
+        continue;
+      }
+
+      // Filter out errorId 'pipline-restarted' since it only applies when the PWA is uninstalled.
+      if (err.errorId === 'pipeline-restarted') {
         continue;
       }
 
