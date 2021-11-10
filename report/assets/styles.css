@@ -1070,6 +1070,11 @@
   word-wrap: break-word;
 }
 
+.lh-header-container .lh-scores-wrapper {
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+
 .lh-report {
   min-width: var(--report-min-width);
 }
@@ -1410,10 +1415,6 @@
 
 .lh-category-wrapper {
   border-bottom: 1px solid var(--color-gray-200);
-}
-
-.lh-category-wrapper:first-of-type {
-  border-top: 1px solid var(--color-gray-200);
 }
 
 .lh-category-header {
