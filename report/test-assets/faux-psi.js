@@ -49,10 +49,30 @@ async function renderLHReport() {
         disableAutoDarkModeAndFireworks: true,
       });
       // TODO: display warnings if appropriate.
-      for (const el of reportRootEl.querySelectorAll('.lh-warnings')) {
+      for (const el of reportRootEl.querySelectorAll('.lh-warnings--toplevel')) {
         el.setAttribute('hidden', 'true');
       }
+
+      // Move env block
+      const metaItemsEl = reportRootEl.querySelector('.lh-meta__items');
+      if (metaItemsEl) {
+        reportRootEl.querySelector('.lh-metrics-container')?.parentNode?.insertBefore(
+          metaItemsEl,
+          reportRootEl.querySelector('.lh-buttons')
+        );
+      }
+
       container.append(reportRootEl);
+
+      // Override some LH styles. (To find .lh-vars we must descend from reportRootEl's parent)
+      for (const el of container.querySelectorAll('article.lh-vars')) {
+        // Ensure these css var names are not stale.
+        el.style.setProperty('--report-content-max-width', '100%');
+        el.style.setProperty('--edge-gap-padding', '0');
+      }
+      for (const el of reportRootEl.querySelectorAll('footer.lh-footer')) {
+        el.style.display = 'none';
+      }
     } catch (e) {
       console.error(e);
       container.textContent = 'Error: LHR failed to render.';

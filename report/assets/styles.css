@@ -691,6 +691,7 @@
   grid-template-columns: 1fr 1fr;
   grid-auto-flow: column;
   grid-column-gap: var(--report-line-height);
+  margin-bottom: var(--default-padding);
 }
 
 .lh-metric {
