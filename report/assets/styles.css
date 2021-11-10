@@ -219,7 +219,7 @@
 @media only screen and (max-width: 480px) {
   .lh-vars {
     --audit-group-margin-bottom: 20px;
-    --category-padding: 12px;
+    --edge-gap-padding: var(--default-padding);
     --env-name-min-width: 120px;
     --gauge-circle-size-big: 96px;
     --gauge-circle-size: 72px;
