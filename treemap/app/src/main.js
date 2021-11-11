@@ -944,6 +944,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     await main();
   } catch (err) {
-    logger.log(err);
+    logger.error(err);
   }
 });

@@ -117,30 +117,32 @@ describe('Lighthouse Treemap', () => {
       expect(optionsInPage.lhr.requestedUrl).toBe(options.lhr.requestedUrl);
     });
 
-    const errorTestCases = [
-      {
-        options: {lhr: 'lol'},
-        error: 'Error: provided json is not a Lighthouse result',
-      },
-      {
-        options: {lhr: {noaudits: {}}},
-        error: 'Error: provided json is not a Lighthouse result',
-      },
-      {
-        options: {lhr: {audits: {}}},
-        error: 'Error: provided Lighthouse result is missing audit: `script-treemap-data`',
-      },
-    ];
-    for (let i = 0; i < errorTestCases.length; i++) {
-      it(`handles errors #${i + 1}`, async () => {
-        const testCase = errorTestCases[i];
-        await loadFromEncodedUrl({options: testCase.options, usesGzip: false});
-        const optionsInPage = await page.evaluate(() => window.__treemapOptions);
-        expect(optionsInPage).toBeUndefined();
-        const error = await page.evaluate(() => document.querySelector('#lh-log').textContent);
-        expect(error).toBe(testCase.error);
-      });
-    }
+    describe('handles errors', () => {
+      const errorTestCases = [
+        {
+          options: {lhr: 'lol'},
+          error: 'Error: provided json is not a Lighthouse result',
+        },
+        {
+          options: {lhr: {noaudits: {}}},
+          error: 'Error: provided json is not a Lighthouse result',
+        },
+        {
+          options: {lhr: {audits: {}}},
+          error: 'Error: provided Lighthouse result is missing audit: `script-treemap-data`',
+        },
+      ];
+      for (let i = 0; i < errorTestCases.length; i++) {
+        it(`case #${i + 1}`, async () => {
+          const testCase = errorTestCases[i];
+          await loadFromEncodedUrl({options: testCase.options, usesGzip: false});
+          const optionsInPage = await page.evaluate(() => window.__treemapOptions);
+          expect(optionsInPage).toBeUndefined();
+          const error = await page.evaluate(() => document.querySelector('#lh-log').textContent);
+          expect(error).toBe(testCase.error);
+        });
+      }
+    });
   });
 
   describe('renders correctly', () => {
