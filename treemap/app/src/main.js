@@ -24,6 +24,8 @@ if (!logEl) {
   throw new Error('logger element not found');
 }
 const logger = new Logger(logEl);
+// `getGistFileContentAsJson` expects logger to be defined globally.
+window.logger = logger;
 
 /** @type {TreemapViewer} */
 let treemapViewer;
