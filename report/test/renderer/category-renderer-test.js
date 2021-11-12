@@ -197,8 +197,8 @@ describe('CategoryRenderer', () => {
         'score shows informative and dash icon');
 
     assert.ok(pwaCategory.manualDescription);
-    const description = categoryDOM
-      .querySelector('.lh-clump--manual .lh-audit-group__description').textContent;
+    const description = categoryDOM.querySelector('.lh-clump--manual').closest('.lh-audit-group')
+      .querySelector('.lh-audit-group__description').textContent;
     // may need to be adjusted if description includes a link at the beginning
     assert.ok(description.startsWith(pwaCategory.manualDescription.substring(0, 20)),
         'no manual description');
@@ -498,5 +498,46 @@ describe('CategoryRenderer', () => {
       assert.strictEqual(shouldBeWarning[0].id, 'passing');
       assert.ok(shouldBeWarning[0].textContent.includes(passingWarning));
     });
+  });
+
+  it('renders audits by weight', () => {
+    const defaultAuditRef = {
+      title: '',
+      description: '',
+      scoreDisplayMode: 'numeric',
+      score: 0,
+      warnings: [],
+    };
+    const category = {
+      id: 'test',
+      title: 'Test',
+      score: 0,
+      auditRefs: [{
+        id: 'audit-1',
+        weight: 0,
+        result: {
+          id: 'audit-1',
+          ...defaultAuditRef,
+        },
+      }, {
+        id: 'audit-2',
+        weight: 1,
+        result: {
+          id: 'audit-2',
+          ...defaultAuditRef,
+        },
+      }, {
+        id: 'audit-3',
+        weight: 0.5,
+        result: {
+          id: 'audit-3',
+          ...defaultAuditRef,
+        },
+      }],
+    };
+    const categoryDOM = renderer.render(category);
+
+    const auditEls = [...categoryDOM.querySelectorAll('.lh-audit')];
+    expect(auditEls.map(el => el.id)).toEqual(['audit-2', 'audit-3', 'audit-1']);
   });
 });

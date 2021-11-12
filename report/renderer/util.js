@@ -38,7 +38,11 @@ const listOfTlds = [
   'web', 'spb', 'blog', 'jus', 'kiev', 'mil', 'wi', 'qc', 'ca', 'bel', 'on',
 ];
 
-export class Util {
+class Util {
+  /** @type {I18n<typeof UIStrings>} */
+  // @ts-expect-error: Is set in report renderer.
+  static i18n = null;
+
   static get PASS_THRESHOLD() {
     return PASS_THRESHOLD;
   }
@@ -103,6 +107,23 @@ export class Util {
 
     /** @type {Map<string, Array<LH.ReportResult.AuditRef>>} */
     const relevantAuditToMetricsMap = new Map();
+
+    // This backcompat converts old LHRs (<9.0.0) to use the new "hidden" group.
+    // Old LHRs used "no group" to identify audits that should be hidden in performance instead of the "hidden" group.
+    // Newer LHRs use "no group" to identify opportunities and diagnostics whose groups are assigned by details type.
+    const [majorVersion] = clone.lighthouseVersion.split('.').map(Number);
+    const perfCategory = clone.categories['performance'];
+    if (majorVersion < 9 && perfCategory) {
+      if (!clone.categoryGroups) clone.categoryGroups = {};
+      clone.categoryGroups['hidden'] = {title: ''};
+      for (const auditRef of perfCategory.auditRefs) {
+        if (!auditRef.group) {
+          auditRef.group = 'hidden';
+        } else if (['load-opportunities', 'diagnostics'].includes(auditRef.group)) {
+          delete auditRef.group;
+        }
+      }
+    }
 
     for (const category of Object.values(clone.categories)) {
       // Make basic lookup table for relevantAudits
@@ -417,7 +438,7 @@ export class Util {
             throttling.downloadThroughputKbps === 1.6 * 1024 * 0.9 &&
             throttling.uploadThroughputKbps === 750 * 0.9;
         };
-        summary = `${isSlow4G() ? 'Slow 4G' : 'Custom'} throttling by DevTools`;
+        summary = isSlow4G() ? Util.i18n.strings.runtimeSlow4g : Util.i18n.strings.runtimeCustom;
         break;
       }
       case 'simulate': {
@@ -429,7 +450,7 @@ export class Util {
         const isSlow4G = () => {
           return rttMs === 150 && throughputKbps === 1.6 * 1024;
         };
-        summary = isSlow4G() ? 'Simulated slow 4G' : 'Custom simulated throttling';
+        summary = isSlow4G() ? Util.i18n.strings.runtimeSlow4g : Util.i18n.strings.runtimeCustom;
         break;
       }
       default:
@@ -516,10 +537,9 @@ export class Util {
     let totalWeight = 0;
     for (const auditRef of category.auditRefs) {
       const auditPassed = Util.showAsPassed(auditRef.result);
-      const notDisplayed = !auditRef.group && category.id === 'performance';
 
       // Don't count the audit if it's manual, N/A, or isn't displayed.
-      if (notDisplayed ||
+      if (auditRef.group === 'hidden' ||
           auditRef.result.scoreDisplayMode === 'manual' ||
           auditRef.result.scoreDisplayMode === 'notApplicable') {
         continue;
@@ -555,14 +575,10 @@ Util.getUniqueSuffix = (() => {
   };
 })();
 
-/** @type {I18n<typeof Util['UIStrings']>} */
-// @ts-expect-error: Is set in report renderer.
-Util.i18n = null;
-
 /**
  * Report-renderer-specific strings.
  */
-Util.UIStrings = {
+const UIStrings = {
   /** Disclaimer shown to users below the metric values (First Contentful Paint, Time to Interactive, etc) to warn them that the numbers they see will likely change slightly the next time they run Lighthouse. */
   varianceDisclaimer: 'Values are estimated and may vary. The [performance score is calculated](https://web.dev/performance-scoring/) directly from these metrics.',
   /** Text link pointing to an interactive calculator that explains Lighthouse scoring. The link text should be fairly short. */
@@ -662,6 +678,22 @@ Util.UIStrings = {
 
   /** Descriptive explanation for environment throttling that was provided by the runtime environment instead of provided by Lighthouse throttling. */
   throttlingProvided: 'Provided by environment',
+  /** Label for an interactive control that will reveal or hide a group of content. This control toggles between the text 'Show' and 'Hide'. */
+  show: 'Show',
+  /** Label for an interactive control that will reveal or hide a group of content. This control toggles between the text 'Show' and 'Hide'. */
+  hide: 'Hide',
+  /** Label for an interactive control that will reveal or hide a group of content. This control toggles between the text 'Expand view' and 'Collapse view'. */
+  expandView: 'Expand view',
+  /** Label for an interactive control that will reveal or hide a group of content. This control toggles between the text 'Expand view' and 'Collapse view'. */
+  collapseView: 'Collapse view',
+  /** Label indicating that Lighthouse throttled the page to emulate a slow 4G network connection. */
+  runtimeSlow4g: 'Slow 4G throttling',
+  /** Label indicating that Lighthouse throttled the page using custom throttling settings. */
+  runtimeCustom: 'Custom throttling',
 };
+Util.UIStrings = UIStrings;
 
-export const UIStrings = Util.UIStrings;
+export {
+  Util,
+  UIStrings,
+};
