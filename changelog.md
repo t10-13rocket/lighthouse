@@ -49,21 +49,20 @@ Lighthouse now offers auditing user flows, scripted with Puppeteer, via the Node
 * make denser. changes to typography, group descriptions, more ([#13249](https://github.com/GoogleChrome/lighthouse/pull/13249))
 * display final screenshot prominently ([#13123](https://github.com/GoogleChrome/lighthouse/pull/13123))
 * redesign runtime settings ([#13125](https://github.com/GoogleChrome/lighthouse/pull/13125), [#13350](https://github.com/GoogleChrome/lighthouse/pull/13350))
-* hidden group backcompat ([#13310](https://github.com/GoogleChrome/lighthouse/pull/13310))
 * help-dialog: remove timespan SEO ([#13354](https://github.com/GoogleChrome/lighthouse/pull/13354))
 * order metrics by row ([#13328](https://github.com/GoogleChrome/lighthouse/pull/13328))
-* translate newly added report strings ([#13308](https://github.com/GoogleChrome/lighthouse/pull/13308))
-* group perf audits by details type ([#13241](https://github.com/GoogleChrome/lighthouse/pull/13241))
 * sort audits by weight ([#13053](https://github.com/GoogleChrome/lighthouse/pull/13053))
-* pwa: remove gauge alias ([#13269](https://github.com/GoogleChrome/lighthouse/pull/13269))
+* translate newly added report strings ([#13308](https://github.com/GoogleChrome/lighthouse/pull/13308))
+* [BREAKING] group perf audits by details type ([#13241](https://github.com/GoogleChrome/lighthouse/pull/13241), [#13310](https://github.com/GoogleChrome/lighthouse/pull/13310))
+* [BREAKING] pwa: remove gauge alias ([#13269](https://github.com/GoogleChrome/lighthouse/pull/13269))
 
 ## ⛏️👷 Fraggle Rock
 
   Support for auditing user flows ([#11313](https://github.com/GoogleChrome/lighthouse/issues/11313))
 
-* fr: handle 0 throughput in timespan ([#13323](https://github.com/GoogleChrome/lighthouse/pull/13323))
-* fr: clone default categories to avoid modification ([#13337](https://github.com/GoogleChrome/lighthouse/pull/13337))
-* fr: add timespan support to h2 ([#12814](https://github.com/GoogleChrome/lighthouse/pull/12814))
+* handle 0 throughput in timespan ([#13323](https://github.com/GoogleChrome/lighthouse/pull/13323))
+* clone default categories to avoid modification ([#13337](https://github.com/GoogleChrome/lighthouse/pull/13337))
+* add timespan support to h2 ([#12814](https://github.com/GoogleChrome/lighthouse/pull/12814))
 * report: remove smooth scrolling ([#13317](https://github.com/GoogleChrome/lighthouse/pull/13317))
 * report: network throttling settings ([#13305](https://github.com/GoogleChrome/lighthouse/pull/13305))
 * report: use filmstrip thumbnail in navigation ([#13283](https://github.com/GoogleChrome/lighthouse/pull/13283))
