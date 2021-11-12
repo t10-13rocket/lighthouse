@@ -146,7 +146,7 @@ class InstallableManifest extends Audit {
         continue;
       }
 
-      // Filter out errorId 'pipline-restarted' since it only applies when the PWA is uninstalled.
+      // Filter out errorId 'pipeline-restarted' since it only applies when the PWA is uninstalled.
       if (err.errorId === 'pipeline-restarted') {
         continue;
       }
