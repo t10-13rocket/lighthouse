@@ -161,6 +161,14 @@ async function build(entryPath, distPath, opts = {minify: true}) {
       }),
       rollupPlugins.nodePolyfills(),
       rollupPlugins.nodeResolve({preferBuiltins: true}),
+      // Protect the sanctity of computeBenchmarkIndex.
+      {
+        name: 'no-treeshaking-for-eval',
+        transform(code, id) {
+          if (!id.endsWith('/page-functions.js')) return;
+          return {moduleSideEffects: 'no-treeshake'};
+        },
+      },
       // Rollup sees the usages of these functions in page functions (ex: see AnchorElements)
       // and treats them as globals. Because the names are "taken" by the global, Rollup renames
       // the actual functions (getNodeDetails$1). The page functions expect a certain name, so
