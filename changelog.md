@@ -13,14 +13,14 @@ Thanks to our new contributors 👽🐷🐰🐯🐻!
 
 ## Notable Changes
 
-* move to minimum Node 14 ([#13243](https://github.com/GoogleChrome/lighthouse/pull/13243))
+* [BREAKING] move to minimum Node 14 ([#13243](https://github.com/GoogleChrome/lighthouse/pull/13243))
 * a11y: add relatedNodes to accessibility audits ([#13193](https://github.com/GoogleChrome/lighthouse/pull/13193))
 
 ### Removed Audits
 
-* appcache-manifest: remove audit ([#13287](https://github.com/GoogleChrome/lighthouse/pull/13287))
-* external-anchors-use-rel-noopener: remove audit ([#13298](https://github.com/GoogleChrome/lighthouse/pull/13298))
-* remove the redirect pass and redirects-http audit ([#12643](https://github.com/GoogleChrome/lighthouse/pull/12643))
+* [BREAKING] appcache-manifest: remove audit ([#13287](https://github.com/GoogleChrome/lighthouse/pull/13287))
+* [BREAKING] external-anchors-use-rel-noopener: remove audit ([#13298](https://github.com/GoogleChrome/lighthouse/pull/13298))
+* [BREAKING] remove the redirect pass and redirects-http audit ([#12643](https://github.com/GoogleChrome/lighthouse/pull/12643))
 
 ## Core
 
@@ -31,9 +31,9 @@ Thanks to our new contributors 👽🐷🐰🐯🐻!
 * config: use abbreviation for pwa category title ([#13270](https://github.com/GoogleChrome/lighthouse/pull/13270))
 * deprecations: use inspector issues ([#13342](https://github.com/GoogleChrome/lighthouse/pull/13342))
 * avoid fatal errors when collecting base artifacts ([#13312](https://github.com/GoogleChrome/lighthouse/pull/13312))
-* errors-in-console: remove url property from items ([#13286](https://github.com/GoogleChrome/lighthouse/pull/13286))
-* image-elements: remove mimeType from artifact ([#13265](https://github.com/GoogleChrome/lighthouse/pull/13265))
-* image-size-responsive: remove elidedUrl, elide url property instead ([#13226](https://github.com/GoogleChrome/lighthouse/pull/13226))
+* [BREAKING] errors-in-console: remove url property from items ([#13286](https://github.com/GoogleChrome/lighthouse/pull/13286))
+* [BREAKING] image-size-responsive: remove elidedUrl, elide url property instead ([#13226](https://github.com/GoogleChrome/lighthouse/pull/13226))
+* [BREAKING] image-elements: remove mimeType from artifact ([#13265](https://github.com/GoogleChrome/lighthouse/pull/13265))
 
 ## Report
 
@@ -48,15 +48,6 @@ Thanks to our new contributors 👽🐷🐰🐯🐻!
 * group perf audits by details type ([#13241](https://github.com/GoogleChrome/lighthouse/pull/13241))
 * sort audits by weight ([#13053](https://github.com/GoogleChrome/lighthouse/pull/13053))
 * pwa: remove gauge alias ([#13269](https://github.com/GoogleChrome/lighthouse/pull/13269))
-* flow: remove smooth scrolling ([#13317](https://github.com/GoogleChrome/lighthouse/pull/13317))
-* flow: network throttling settings ([#13305](https://github.com/GoogleChrome/lighthouse/pull/13305))
-* flow: use filmstrip thumbnail in navigation ([#13283](https://github.com/GoogleChrome/lighthouse/pull/13283))
-* flow: fix report anchors ([#13233](https://github.com/GoogleChrome/lighthouse/pull/13233))
-* flow: full page screenshot renderer ([#13276](https://github.com/GoogleChrome/lighthouse/pull/13276))
-* flow: category tooltip highest impact ([#13230](https://github.com/GoogleChrome/lighthouse/pull/13230))
-* flow: import lhr strings ([#13215](https://github.com/GoogleChrome/lighthouse/pull/13215))
-* flow: i18n formatter ([#13190](https://github.com/GoogleChrome/lighthouse/pull/13190))
-* flow: mock styles ([#13220](https://github.com/GoogleChrome/lighthouse/pull/13220))
 
 ## ⛏️👷 Fraggle Rock
 
@@ -65,6 +56,15 @@ Thanks to our new contributors 👽🐷🐰🐯🐻!
 * fr: handle 0 throughput in timespan ([#13323](https://github.com/GoogleChrome/lighthouse/pull/13323))
 * fr: clone default categories to avoid modification ([#13337](https://github.com/GoogleChrome/lighthouse/pull/13337))
 * fr: add timespan support to h2 ([#12814](https://github.com/GoogleChrome/lighthouse/pull/12814))
+* report: remove smooth scrolling ([#13317](https://github.com/GoogleChrome/lighthouse/pull/13317))
+* report: network throttling settings ([#13305](https://github.com/GoogleChrome/lighthouse/pull/13305))
+* report: use filmstrip thumbnail in navigation ([#13283](https://github.com/GoogleChrome/lighthouse/pull/13283))
+* report: fix report anchors ([#13233](https://github.com/GoogleChrome/lighthouse/pull/13233))
+* report: full page screenshot renderer ([#13276](https://github.com/GoogleChrome/lighthouse/pull/13276))
+* report: category tooltip highest impact ([#13230](https://github.com/GoogleChrome/lighthouse/pull/13230))
+* report: import lhr strings ([#13215](https://github.com/GoogleChrome/lighthouse/pull/13215))
+* report: i18n formatter ([#13190](https://github.com/GoogleChrome/lighthouse/pull/13190))
+* report: mock styles ([#13220](https://github.com/GoogleChrome/lighthouse/pull/13220))
 
 ## Deps
 
