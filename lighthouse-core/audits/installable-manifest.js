@@ -21,7 +21,7 @@ const UIStrings = {
   'columnValue': 'Failure reason',
   /**
    * @description [ICU Syntax] Label for an audit identifying the number of installability errors found in the page.
-  */
+   */
   'displayValue': `{itemCount, plural,
     =1 {1 reason}
     other {# reasons}
@@ -50,15 +50,15 @@ const UIStrings = {
    * for the current page encloses the scope and start URL from the manifest. */
   'no-matching-service-worker': `No matching service worker detected. You may need to reload the page, or check that the scope of the service worker for the current page encloses the scope and start URL from the manifest.`,
   /**
-  * @description Error message explaining that the manifest does not contain a suitable icon.
-  * @example {192} value0
-  */
+   * @description Error message explaining that the manifest does not contain a suitable icon.
+   * @example {192} value0
+   */
   'manifest-missing-suitable-icon': `Manifest does not contain a suitable icon - PNG, SVG or WebP format of at least {value0}\xa0px is required, the sizes attribute must be set, and the purpose attribute, if set, must include "any".`,
 
   /**
-  * @description Error message explaining that the manifest does not supply an icon of the correct format.
-  * @example {192} value0
-  */
+   * @description Error message explaining that the manifest does not supply an icon of the correct format.
+   * @example {192} value0
+   */
   'no-acceptable-icon': `No supplied icon is at least {value0}\xa0px square in PNG, SVG or WebP format, with the purpose attribute unset or set to "any"`,
 
   /** Error message explaining that the icon could not be downloaded. */
