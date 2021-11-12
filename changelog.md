@@ -4,6 +4,8 @@
 
 We expect this release to ship in the DevTools of [Chrome 98](https://chromiumdash.appspot.com/schedule), and to PageSpeed Insights within 2 weeks.
 
+See the [What's new in Lighthouse 9.0 blog post](https://web.dev/blog/lighthouse-9-0/). Continue for the changelog.
+
 ## New Contributors
 
 Thanks to our new contributors 👽🐷🐰🐯🐻! 
@@ -21,6 +23,12 @@ Thanks to our new contributors 👽🐷🐰🐯🐻!
 * [BREAKING] appcache-manifest: remove audit ([#13287](https://github.com/GoogleChrome/lighthouse/pull/13287))
 * [BREAKING] external-anchors-use-rel-noopener: remove audit ([#13298](https://github.com/GoogleChrome/lighthouse/pull/13298))
 * [BREAKING] remove the redirect pass and redirects-http audit ([#12643](https://github.com/GoogleChrome/lighthouse/pull/12643))
+
+### Preview: Audit User Flows
+
+<img src="https://user-images.githubusercontent.com/6752989/141487869-614428a5-d475-4cce-b95a-48803e939c66.png" alt="Report of a Lighthouse User Flow. Shows the overivew page, with summaries of 4 subreports." width="800px">
+
+Lighthouse now offers auditing user flows, scripted with Puppeteer, via the Node CLI. This means you can now audit a page beyond its initial load. See [the Lighthouse user flows blog post](https://web.dev/lighthouse-user-flows/) for more.
 
 ## Core
 
