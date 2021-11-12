@@ -93,6 +93,8 @@ const UIStrings = {
   'manifest-location-changed': `Manifest URL changed while the manifest was being fetched.`,
   /** Warning message explaining that the page does not work offline. */
   'warn-not-offline-capable': `Page does not work offline. The page will not be regarded as installable after Chrome 93, stable release August 2021.`,
+  /** Error message explaining that Lighthouse failed while detecting a service worker, and directing the user to try again in a new Chrome. */
+  'protocol-timeout': `Lighthouse could not determine if there was a service worker. Please try with a newer version of Chrome.`,
   /** Message logged when the web app has been uninstalled o desktop, signalling that the install banner state is being reset. */
   'pipeline-restarted': 'PWA has been uninstalled and installability checks resetting.',
 };
