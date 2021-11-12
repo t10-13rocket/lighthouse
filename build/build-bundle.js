@@ -163,7 +163,7 @@ async function build(entryPath, distPath, opts = {minify: true}) {
       rollupPlugins.nodeResolve({preferBuiltins: true}),
       // Protect the sanctity of computeBenchmarkIndex.
       {
-        name: 'no-treeshaking-for-eval',
+        name: 'no-treeshaking',
         transform(code, id) {
           if (!id.endsWith('/page-functions.js')) return;
           return {moduleSideEffects: 'no-treeshake'};
